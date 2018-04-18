@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "III",
+        "I I",
+        "I I"
+    ],
+    
+    "key":
+    {
+        "I":
+        {
+            "item": "ntm:ingot_meteor"
+        }
+    },
+    
+    "result":
+    {
+        "item": "ntm:leggings_meteor",
+        "count": 1
+    }
+}
