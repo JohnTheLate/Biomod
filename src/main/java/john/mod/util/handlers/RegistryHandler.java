@@ -1,5 +1,6 @@
 package john.mod.util.handlers;
 
+import john.mod.init.BiomeInit;
 import john.mod.init.BlockInit;
 import john.mod.init.ItemInit;
 import john.mod.util.interfaces.IHasModel;
@@ -50,5 +51,7 @@ public class RegistryHandler
 	public static void otherRegistries()
 	{
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
+
+		BiomeInit.registerBiomes();
 	}
 }
