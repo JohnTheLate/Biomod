@@ -38,9 +38,9 @@ public class BiomeOnuWahi extends Biome
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 5, 2,3));
 	}
 
-	/*@Override
+	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 	{
 		return TREE;
-	} */
+	}
 }
