@@ -3,6 +3,7 @@ package john.mod;
 import john.mod.proxy.CommonProxy;
 import john.mod.tabs.NTutTab;
 import john.mod.util.Reference;
+import john.mod.util.handlers.RegistryHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +25,7 @@ public class Main
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {}
+	public void preInit(FMLPreInitializationEvent event) {RegistryHandler.otherRegistries();}
 	@EventHandler
 	public void init(FMLInitializationEvent event) {}
 	@EventHandler

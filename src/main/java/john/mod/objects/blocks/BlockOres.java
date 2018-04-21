@@ -1,6 +1,5 @@
 package john.mod.objects.blocks;
 
-import it.unimi.dsi.fastutil.Stack;
 import john.mod.Main;
 import john.mod.init.BlockInit;
 import john.mod.init.ItemInit;

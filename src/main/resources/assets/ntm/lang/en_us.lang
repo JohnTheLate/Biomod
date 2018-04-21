@@ -20,6 +20,8 @@ item.leggings_meteor.name=Meteor Leggings
 item.boots_meteor.name=Meteor Boots
 
 tile.block_meteor.name=Meteor Block
+tile.ore_meteor.name=Meteor Ore
+
 tile.ore_overworld_meteor.name=Meteor Ore
 tile.ore_overworld_aluminium.name=Aluminium Ore
 

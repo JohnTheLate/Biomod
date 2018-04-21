@@ -11,10 +11,11 @@ import net.minecraft.block.material.Material;
 public class BlockInit 
 {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
-	
+
 	public static final Block BLOCK_METEOR = new BlockBase("block_meteor", Material.IRON);
+	public static final Block ORE_METEOR = new BlockBase("ore_meteor", Material.ROCK);
 	
-	public static final Block ORE_END = new BlockOres("ore_end", "end");
-	public static final Block ORE_OVERWORLD = new BlockOres("ore_end", "overworld");
-	public static final Block ORE_NETHER = new BlockOres("ore_end", "nether");
+	//public static final Block ORE_END = new BlockOres("ore_end", "end");
+	//public static final Block ORE_OVERWORLD = new BlockOres("ore_overworld", "overworld");
+	//public static final Block ORE_NETHER = new BlockOres("ore_nether", "nether");
 }

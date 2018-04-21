@@ -1,7 +1,6 @@
 {
     "variants": 
     {
-        "variant=aluminium": { "model": "ntm_ore_overworld_aluminium" },
         "variant=meteor": { "model": "ntm:ore_overworld_meteor" }
     }
 }
