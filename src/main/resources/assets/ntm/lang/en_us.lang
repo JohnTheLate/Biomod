@@ -4,6 +4,8 @@ itemGroup.ntuttab=New Tutorial Mod
 generator.MataNui=Mata Nui
 generator.SingleBiome=Single Biome
 
+entity.centaur.name=Centaur
+
 container.meteor_furnace=Meteor Furnace
 container.rf_generator=Nether Generator
 container.microwave=Microwave

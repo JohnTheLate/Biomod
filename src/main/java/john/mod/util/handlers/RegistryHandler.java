@@ -2,6 +2,7 @@ package john.mod.util.handlers;
 
 import john.mod.init.BiomeInit;
 import john.mod.init.BlockInit;
+import john.mod.init.EntityInit;
 import john.mod.init.ItemInit;
 import john.mod.util.interfaces.IHasModel;
 import john.mod.world.gen.WorldGenCustomOres;
@@ -56,6 +57,9 @@ public class RegistryHandler
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 
 		BiomeInit.registerBiomes();
+
+		EntityInit.registerEntities();
+		RenderHandler.registerEntityRenders();
 	}
 
 	public static void postInitRegistries()
