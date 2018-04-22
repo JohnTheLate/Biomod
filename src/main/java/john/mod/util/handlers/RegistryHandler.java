@@ -62,6 +62,11 @@ public class RegistryHandler
 		RenderHandler.registerEntityRenders();
 	}
 
+	public static void initRegistries()
+	{
+		SoundsHandler.registerSounds();
+	}
+
 	public static void postInitRegistries()
 	{
 		WorldType SINGLEBIOME = new WorldTypeSingleBiome();
