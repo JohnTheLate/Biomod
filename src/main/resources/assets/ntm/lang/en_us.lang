@@ -1,6 +1,11 @@
 itemGroup.john_tab=John Mod
 itemGroup.ntuttab=New Tutorial Mod
 
+generator.MataNui=Mata Nui
+generator.SingleBiome=Single Biome
+
+entity.centaur.name=Centaur
+
 container.meteor_furnace=Meteor Furnace
 container.rf_generator=Nether Generator
 container.microwave=Microwave
@@ -24,17 +29,3 @@ tile.ore_meteor.name=Meteor Ore
 
 tile.ore_overworld_meteor.name=Meteor Ore
 tile.ore_overworld_aluminium.name=Aluminium Ore
-
-tile.tutorial_ore.name=Tutorial Ore
-item.tutorial_pickaxe.name=Tutorial Pickaxe
-item.tutorial_axe.name=Tutorial Axe
-item.tutorial_hoe.name=Tutorial Hoe
-item.tutorial_shovel.name=Tutorial Shovel
-item.tutorial_sword.name=Tutorial Sword
-item.tutorial_helmet.name=Tutorial Helmet
-item.tutorial_chestplate.name=Tutorial Chestplate
-item.tutorial_leggins.name=Tutorial Leggins
-item.tutorial_boots.name=Tutorial Boots
-item.test_snowball.name=Test Snowball
-tile.tutorial_block.name=Tutorial Block
-tile.tutorial_stairs.name=Tutorial Stairs

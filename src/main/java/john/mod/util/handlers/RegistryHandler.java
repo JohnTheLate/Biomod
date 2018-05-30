@@ -1,11 +1,16 @@
 package john.mod.util.handlers;
 
+import john.mod.init.BiomeInit;
 import john.mod.init.BlockInit;
+import john.mod.init.EntityInit;
 import john.mod.init.ItemInit;
 import john.mod.util.interfaces.IHasModel;
 import john.mod.world.gen.WorldGenCustomOres;
+import john.mod.world.types.WorldTypeMataNui;
+import john.mod.world.types.WorldTypeSingleBiome;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -47,8 +52,24 @@ public class RegistryHandler
 		}
 	}
 	
-	public static void otherRegistries()
+	public static void preInitRegistries()
 	{
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
+
+		BiomeInit.registerBiomes();
+
+		EntityInit.registerEntities();
+		RenderHandler.registerEntityRenders();
+	}
+
+	public static void initRegistries()
+	{
+		SoundsHandler.registerSounds();
+	}
+
+	public static void postInitRegistries()
+	{
+		WorldType SINGLEBIOME = new WorldTypeSingleBiome();
+		WorldType MATANUI = new WorldTypeMataNui();
 	}
 }
