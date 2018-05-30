@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+
+    "pattern":
+    [
+        " MM",
+        "GMM",
+        "SM "
+    ],
+
+    "key":
+    {
+        "M":
+        {
+            "item": "minecraft:gold_ingot"
+        },
+        "S":
+        {
+            "item": "minecraft:stick"
+        },
+        "G":
+        {
+            "item": "ntm:biogear"
+        }
+    },
+
+    "result":
+    {
+        "item": "ntm:biodrill_gold",
+        "count": 1
+    }
+}

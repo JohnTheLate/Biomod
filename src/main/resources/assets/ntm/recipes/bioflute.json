@@ -1,0 +1,39 @@
+{
+    "type": "minecraft:crafting_shaped",
+
+    "pattern":
+    [
+        " GR",
+        "GR ",
+        "PT "
+    ],
+
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:reeds"
+        },
+        "P":
+        {
+            "item": "minecraft:planks",
+            "data": 32767
+        },
+        "T":
+        {
+            "item": "minecraft:wool",
+            "data": 3
+        },
+        "G":
+        {
+            "item": "minecraft:wool",
+            "data": 5
+        }
+    },
+
+    "result":
+    {
+        "item": "ntm:bioflute",
+        "count": 1
+    }
+}

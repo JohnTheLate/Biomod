@@ -5,6 +5,7 @@ import java.util.List;
 
 import john.mod.objects.blocks.BlockBase;
 import john.mod.objects.blocks.BlockOres;
+import john.mod.objects.blocks.machines.specialfurnace.BlockSpecialFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -14,6 +15,8 @@ public class BlockInit
 
 	public static final Block BLOCK_METEOR = new BlockBase("block_meteor", Material.IRON);
 	public static final Block ORE_METEOR = new BlockBase("ore_meteor", Material.ROCK);
+
+	public static final Block SPECIAL_FURNACE = new BlockSpecialFurnace("special_furnace");
 	
 	//public static final Block ORE_END = new BlockOres("ore_end", "end");
 	//public static final Block ORE_OVERWORLD = new BlockOres("ore_overworld", "overworld");
