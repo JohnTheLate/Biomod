@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+
+    "pattern":
+    [
+        " MM",
+        "GMM",
+        "SM "
+    ],
+
+    "key":
+    {
+        "M":
+        {
+            "item": "minecraft:planks",
+            "data": 32767
+        },
+        "S":
+        {
+            "item": "minecraft:stick"
+        },
+        "G":
+        {
+            "item": "ntm:biogear"
+        }
+    },
+
+    "result":
+    {
+        "item": "ntm:biodrill_wood",
+        "count": 1
+    }
+}

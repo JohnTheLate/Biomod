@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "burning=false,facing=north": { "model": "ntm:special_furnace" },
+    "burning=false,facing=east": { "model": "ntm:special_furnace", "y": 90 },
+    "burning=false,facing=south": { "model": "ntm:special_furnace", "y": 180 },
+    "burning=false,facing=west": { "model": "ntm:special_furnace", "y": 270 },
+    "burning=true,facing=north": { "model": "ntm:lit_special_furnace" },
+    "burning=true,facing=east": { "model": "ntm:lit_special_furnace", "y": 90 },
+    "burning=true,facing=south": { "model": "ntm:lit_special_furnace", "y": 180 },
+    "burning=true,facing=west": { "model": "ntm:lit_special_furnace", "y":270 }
+  }
+}

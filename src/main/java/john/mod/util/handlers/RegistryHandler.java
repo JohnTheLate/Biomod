@@ -1,5 +1,6 @@
 package john.mod.util.handlers;
 
+import john.mod.BioEventSubscriber;
 import john.mod.init.BiomeInit;
 import john.mod.init.BlockInit;
 import john.mod.init.EntityInit;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -60,6 +62,10 @@ public class RegistryHandler
 
 		EntityInit.registerEntities();
 		RenderHandler.registerEntityRenders();
+
+		MinecraftForge.EVENT_BUS.register(new BioEventSubscriber());
+
+		System.out.println("Registered pre inits");
 	}
 
 	public static void initRegistries()

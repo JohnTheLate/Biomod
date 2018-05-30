@@ -9,4 +9,6 @@ public class Reference
 	public static final String COMMON = "john.mod.proxy.CommonProxy";
 
 	public static final int ENTITY_CENTAUR = 120;
+
+	public static final	int GUI_SPECIAL_FURNACE = 0;
 }

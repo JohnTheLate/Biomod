@@ -22,7 +22,7 @@ public class ToolAxe extends ItemTool implements IHasModel
 
     public ToolAxe(String name, ToolMaterial material)
     {
-        super(material, EFFECTIVE_ON);
+        super(5.5F, -3.05F, material, EFFECTIVE_ON);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.TOOLS);
