@@ -6,6 +6,7 @@ import java.util.List;
 import john.mod.objects.armor.ArmorBase;
 import john.mod.objects.items.BioItemBase;
 import john.mod.objects.items.ItemBase;
+import john.mod.objects.kanohi.*;
 import john.mod.objects.tools.*;
 import john.mod.objects.tools.elemental.*;
 import john.mod.util.Reference;
@@ -23,13 +24,12 @@ public class ItemInit
 	//Materials
 	public static final ToolMaterial TOOL_METEOR = EnumHelper.addToolMaterial("tool_meteor", 2, 625, 7.0F, 2.5F, 28);
 	public static final ArmorMaterial ARMOR_METEOR = EnumHelper.addArmorMaterial("armor_meteor", Reference.MODID+":meteor", 22, new int[]{2, 5, 7, 3}, 28, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static final ToolMaterial TOOL_MAGIC_WOOD = EnumHelper.addToolMaterial("tool_magic_wood", 0, 128, 2.0F, 0.0F, 40);
+	public static final ToolMaterial TOOL_MAGIC_WOOD = EnumHelper.addToolMaterial("tool_magic_wood", 0, 128, 2.0F, -1.0F, 40);
 
 	//Items
 	public static final Item INGOT_METEOR = new ItemBase("ingot_meteor");
 	
 	//Tools
-
 	public static final Item AXE_METEOR = new ToolAxe("axe_meteor", TOOL_METEOR);
 	public static final Item HOE_METEOR = new ToolHoe("hoe_meteor", TOOL_METEOR);
 	public static final Item PICKAXE_METEOR = new ToolPickaxe("pickaxe_meteor", TOOL_METEOR);
@@ -61,6 +61,14 @@ public class ItemInit
 	public static final Item STAFF_WATER = new WaterStaff("bioweap_water_staff");
 	public static final Item STAFF_EARTH = new EarthStaff("bioweap_earth_staff");
 	public static final Item STAFF_STONE = new StoneStaff("bioweap_stone_staff");
+
+	//Kanohi
+	public static final Item KANOHI_HAU = new KanohiHau("kanohi_hau");
+	public static final Item KANOHI_MIRU = new KanohiMiru("kanohi_miru");
+	public static final Item KANOHI_PAKARI = new KanohiPakari("kanohi_pakari");
+	public static final Item KANOHI_AKAKU = new KanohiAkaku("kanohi_akaku");
+	public static final Item KANOHI_KAUKAU = new KanohiKaukau("kanohi_kaukau");
+	public static final Item KANOHI_KAKAMA = new KanohiKakama("kanohi_kakama");
 
 	//Bionicle Items
 	public static final Item BIO_GEAR = new BioItemBase("biogear");

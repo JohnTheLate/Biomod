@@ -7,6 +7,6 @@ public class BioItemBase extends ItemBase
 	public BioItemBase(String name)
 	{
 		super(name);
-		setCreativeTab(Main.biotab);
+		setCreativeTab(Main.BIOTAB);
 	}
 }

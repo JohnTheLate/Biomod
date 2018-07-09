@@ -36,7 +36,7 @@ public class BioWeapon extends Item implements IHasModel
 		//this.setMaxDamage(material.getMaxUses());
 		setUnlocalizedName(name);
 		//setRegistryName(name);
-		this.setCreativeTab(Main.biotab);
+		this.setCreativeTab(Main.BIOTAB);
 
 		this.setRegistryName(new ResourceLocation("ntm","tools/" + name));
 

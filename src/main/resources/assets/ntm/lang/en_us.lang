@@ -48,6 +48,13 @@ item.bioweap_ice_staff.name=Ice Staff
 item.bioweap_water_staff.name=Water Staff
 item.bioweap_stone_staff.name=Stone Staff
 
+item.kanohi_hau.name=Kanohi Hau
+item.kanohi_miru.name=Kanohi Miru
+item.kanohi_pakari.name=Kanohi Pakari
+item.kanohi_akaku.name=Kanohi Akaku
+item.kanohi_kaukau.name=Kanohi Kaukau
+item.kanohi_kakama.name=Kanohi Kakama
+
 item.biogear.name=Gear
 tile.biotelescope.name=Telescope
 item.biokoliball.name=Koli Ball

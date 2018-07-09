@@ -18,8 +18,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main 
 {
-	public static final CreativeTabs ntuttab = new NTutTab("ntuttab");
-	public static final CreativeTabs biotab = new BioTab("biotab");
+	public static final CreativeTabs NTUTTAB = new NTutTab("ntuttab");
+	public static final CreativeTabs BIOTAB = new BioTab("biotab");
 	
 	@Instance
 	public static Main instance;

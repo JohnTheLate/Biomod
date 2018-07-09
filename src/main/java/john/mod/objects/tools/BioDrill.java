@@ -24,7 +24,7 @@ public class BioDrill extends ItemTool implements IHasModel
 		super(3.0F, -3.2F, material, EFFECTIVE_ON);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(Main.biotab);
+		setCreativeTab(Main.BIOTAB);
 		this.efficiency = ((material.getEfficiency() * 1.5F) + 2.0F);
 		this.setMaxDamage(material.getMaxUses() * 2);
 

@@ -13,6 +13,6 @@ public class BioSaw extends BioItemBase
 	{
 		super(name);
 		this.efficiency = material.getEfficiency();
-		setCreativeTab(Main.biotab);
+		setCreativeTab(Main.BIOTAB);
 	}
 }
