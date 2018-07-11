@@ -62,11 +62,10 @@ public class CustomFoodStats extends FoodStats
 	@Override
 	public void addExhaustion(float exhaustion)
 	{
-		System.out.println("CustomFoodStats addExhaustion is called");
 		if (isIce)
-		{												// Halves exhaustion gained from any activity but passive regeneration of health,
-			oldStats.addExhaustion(exhaustion*20.5F); 	// which is called from inside the oldStats using that class's addExhaustion method
-		}												// For testing purposes; will be *0.5 later
+		{													// Halves exhaustion gained from any activity but passive regeneration of health,
+			oldStats.addExhaustion(exhaustion*0.5F);		// which is called from inside the oldStats using that class's addExhaustion method
+		}													// For testing purposes; will be *0.5 later
 		else
 		{
 			oldStats.addExhaustion(exhaustion);

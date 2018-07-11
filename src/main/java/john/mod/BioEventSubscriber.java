@@ -65,7 +65,7 @@ public class BioEventSubscriber {
 	{
 		System.out.println("Event active: playerLogin");
 		final IElementHandler player = getHandler(event.player);
-		player.setElement(BioElements.ICE);
+		player.setElement(BioElements.AIR);
 	}
 
 	@SubscribeEvent
@@ -90,6 +90,11 @@ public class BioEventSubscriber {
 					event.setAmount(event.getAmount() * 0.5F);
 				}
 			}
+			else if (getHandler(event.getEntity()).getElement() == BioElements.AIR && event.getSource() == DamageSource.FALL)
+			{
+				System.out.println("Fall damage halved");
+				event.setAmount(event.getAmount() * 0.5F);
+			}
 		}
 	}
 
@@ -102,7 +107,8 @@ public class BioEventSubscriber {
 			if (getHandler(event.getEntity()).getElement() == BioElements.AIR) // check für BioElements.AIR
 			{
 				System.out.println("Element is AIR, adjusting Jump");
-				event.getEntity().motionY += 0.5D;
+				event.getEntity().motionY = 22.8D;
+				((EntityPlayer) event.getEntity()).getFoodStats().setFoodLevel(0);
 
 				event.getEntity().motionX *= 1.2D;
 				event.getEntity().motionZ *= 1.2D;
@@ -110,7 +116,7 @@ public class BioEventSubscriber {
 		}
 	}
 
-	@SubscribeEvent
+/*	@SubscribeEvent
 	public void landingEvent(LivingFallEvent event)
 	{
 		if (event.getEntity() instanceof EntityPlayer)
@@ -122,7 +128,7 @@ public class BioEventSubscriber {
 				event.getEntity().fallDistance *= 0.5;
 			}
 		}
-	}
+	}*/
 
 
 /*	@SubscribeEvent
