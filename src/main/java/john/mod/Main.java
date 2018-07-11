@@ -50,8 +50,8 @@ public class Main
 	@CapabilityInject(IElementHandler.class)
 	public static final Capability<IElementHandler> CAPABILITY_ELEMENT = null;
 
-	public static IElementHandler getHandler(Entity entity) {
-
+	public static IElementHandler getHandler(Entity entity)
+	{
 		if (entity.hasCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN))
 			return entity.getCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN);
 		return null;
