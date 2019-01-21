@@ -4,6 +4,7 @@ import john.mod.init.ItemInit;
 import john.mod.replacements.CustomFoodStats;
 import john.mod.util.Provider;
 import john.mod.util.interfaces.IElementHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,8 +24,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static john.mod.Main.getHandler;
+import static john.mod.Main.setLocalPlayerElement;
+import static net.minecraft.block.BlockLiquid.LEVEL;
 
 @Mod.EventBusSubscriber
 public class BioEventSubscriber {
@@ -40,7 +45,8 @@ public class BioEventSubscriber {
 			if (event.getState().getBlock() == Blocks.STONE)
 			{
 				System.out.println("Stone Block found");
-				event.getWorld().setBlockState((new BlockPos(event.getPos().getX() + 1, event.getPos().getY(), event.getPos().getZ())), Blocks.LAVA.getDefaultState());
+				event.getWorld().setBlockState(event.getPos(), Blocks.FLOWING_LAVA.getDefaultState().withProperty(LEVEL, Integer.valueOf(14)));
+				event.setCanceled(true);
 			}
 		}
 		else if (event.getState().getBlock() == Blocks.FIRE)
@@ -64,8 +70,8 @@ public class BioEventSubscriber {
 	public void playerLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		System.out.println("Event active: playerLogin");
-		final IElementHandler player = getHandler(event.player);
-		player.setElement(BioElements.AIR);
+		getHandler(event.player).setElement(BioElements.AIR);
+		//getHandler(Minecraft.getMinecraft().player).setElement(BioElements.AIR);
 	}
 
 	@SubscribeEvent
@@ -104,15 +110,37 @@ public class BioEventSubscriber {
 		if (event.getEntity() instanceof EntityPlayer)
 		{
 			System.out.println("jumpEvent: Entity is EntityPlayer");
-			if (getHandler(event.getEntity()).getElement() == BioElements.AIR) // check für BioElements.AIR
+
+			EntityPlayer evPlayer = (EntityPlayer)event.getEntity();
+
+			//if (evPlayer.world.isRemote)
+			//{
+			/*if (getHandler(event.getEntity()).getElement() == BioElements.AIR) // check für BioElements.AIR
 			{
 				System.out.println("Element is AIR, adjusting Jump");
-				event.getEntity().motionY = 22.8D;
-				((EntityPlayer) event.getEntity()).getFoodStats().setFoodLevel(0);
+				event.getEntity().motionY += 3.0D;
+				((EntityPlayer) event.getEntity()).getFoodStats().setFoodLevel(18);
 
-				event.getEntity().motionX *= 1.2D;
-				event.getEntity().motionZ *= 1.2D;
-			}
+				event.getEntity().motionX *= 5.2D;
+				event.getEntity().motionZ *= 5.2D;
+			}*/
+
+			System.out.println("Element: " + getHandler(evPlayer).getElement());
+			System.out.println("Element: " + getHandler(Minecraft.getMinecraft().player).getElement());
+
+				Boolean abc = getHandler(evPlayer).getElement() == BioElements.AIR;
+
+				if (abc) // check für BioElements.AIR
+				{
+					System.out.println("Element is AIR, adjusting Jump");
+					evPlayer.motionX += 1.0D;
+				}
+				else
+				{
+					System.out.println("Element is not air here");
+				}
+
+			//}
 		}
 	}
 
@@ -149,18 +177,20 @@ public class BioEventSubscriber {
 			System.out.println("entityJoinWorld: Entity is EntityPlayer");
 			EntityPlayer evPlayer = (EntityPlayer)event.getEntity();
 			FoodStats oldFoodStats = evPlayer.getFoodStats();
-			if (oldFoodStats instanceof CustomFoodStats)
+			if (oldFoodStats instanceof CustomFoodStats && oldFoodStats.getClass() == FoodStats.class) // Check to prevent nesting
 			{
 				System.out.println("oldFootStats are already CustomFoodStats, no reflection to be done");
 			}
 			else
 			{
-				CustomFoodStats newFoodStats = new CustomFoodStats(oldFoodStats, getHandler(evPlayer).getElement() == BioElements.ICE);
+				CustomFoodStats newFoodStats = new CustomFoodStats(oldFoodStats, getHandler(evPlayer).getElement() == BioElements.ICE); // Creates a new CustomFoodStats, but gives the old FoodStats of the player to it
 
 				System.out.println("Starting Reflection");
-				ReflectionHelper.setPrivateValue(EntityPlayer.class, evPlayer, newFoodStats, 15);
+				ReflectionHelper.setPrivateValue(EntityPlayer.class, evPlayer, newFoodStats, 15); // Replaces the original foodstats of the player with the new CustomFoodStats
 				System.out.println("Reflection done?");
 			}
+
+
 		}
 	}
 }

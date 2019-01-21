@@ -36,7 +36,7 @@ public class BlockSpecialFurnace extends BlockBase implements ITileEntityProvide
 
 	public BlockSpecialFurnace(String name)
 	{
-		super(name, Material.IRON);
+		super(name, Material.IRON, 3.5F, 17.5F);
 		setSoundType(SoundType.METAL);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
 	}

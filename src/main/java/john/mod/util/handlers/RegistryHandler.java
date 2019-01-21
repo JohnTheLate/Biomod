@@ -1,6 +1,7 @@
 package john.mod.util.handlers;
 
 import john.mod.BioEventSubscriber;
+import john.mod.Main;
 import john.mod.init.BiomeInit;
 import john.mod.init.BlockInit;
 import john.mod.init.EntityInit;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.lang.reflect.Field;
@@ -39,6 +41,7 @@ public class RegistryHandler
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
+		TileEntityHandler.registerTileEntities();
 	}
 	
 	@SubscribeEvent
@@ -91,6 +94,7 @@ public class RegistryHandler
 	public static void initRegistries()
 	{
 		SoundsHandler.registerSounds();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 	}
 
 	public static void postInitRegistries()
