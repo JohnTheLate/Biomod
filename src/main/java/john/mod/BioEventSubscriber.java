@@ -6,6 +6,7 @@ import john.mod.util.Provider;
 import john.mod.util.interfaces.IElementHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,7 @@ public class BioEventSubscriber {
 				event.setCanceled(true);
 			}
 		}
-		else if (event.getState().getBlock() == Blocks.FIRE)
+		else if (event.getState().getBlock() == Blocks.FIRE) //This is not functional at the moment!
 		{
 			event.getPlayer().dropItem(new ItemStack(Blocks.FIRE), false);
 			System.out.println("drop Fire");
@@ -70,7 +71,35 @@ public class BioEventSubscriber {
 	public void playerLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		System.out.println("Event active: playerLogin");
-		getHandler(event.player).setElement(BioElements.AIR);
+		getHandler(event.player).setElement(BioElements.WATER);
+		BioElements element = getHandler(event.player).getElement();
+		final double defaultHealth = 20.D;
+		final float defaultWalkSpeed = 0.1F;
+		switch(element)
+		{
+			case FIRE:
+				event.player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(22.0D);
+				event.player.capabilities.setPlayerWalkSpeed(defaultWalkSpeed);
+				break;
+
+			case AIR:
+				event.player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(defaultHealth);
+				event.player.capabilities.setPlayerWalkSpeed(0.115F);
+				break;
+
+			case WATER:
+				event.player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
+				event.player.capabilities.setPlayerWalkSpeed(0.115F);
+				//Swim speed requires newer forge version! http://www.minecraftforge.net/forum/topic/67289-solved-missing-swim-speed-attribute/
+				break;
+
+			default:
+				event.player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(defaultHealth);
+				event.player.capabilities.setPlayerWalkSpeed(defaultWalkSpeed);
+				//Reset swim speed to normal once implemented at WATER
+				break;
+		}
+
 		//getHandler(Minecraft.getMinecraft().player).setElement(BioElements.AIR);
 	}
 
@@ -100,6 +129,12 @@ public class BioEventSubscriber {
 			{
 				System.out.println("Fall damage halved");
 				event.setAmount(event.getAmount() * 0.5F);
+			}
+			else if (getHandler(event.getEntity()).getElement() == BioElements.WATER && event.getSource() == DamageSource.DROWN)
+			{
+				System.out.println("Drown damage halved");
+				event.setAmount(event.getAmount() * 0.5F);
+				//event.getEntity().setAir(20); //this will double the time it takes to drown, but also make the graphic re-appear
 			}
 		}
 	}
@@ -159,15 +194,18 @@ public class BioEventSubscriber {
 	}*/
 
 
-/*	@SubscribeEvent
+	@SubscribeEvent
 	public void playerTick(TickEvent.PlayerTickEvent event)
 	{
-		if (getHandler(event.player).getElement() == BioElements.AIR)
+		if (event.player.getAir() < 299 && getHandler(event.player).getElement() == BioElements.WATER)
 		{
-			event.player.getFoodStats().addExhaustion(1.0F);
-			//event.player.getFoodStats().
+			if (event.player.ticksExisted % 2 == 0)
+			{
+				event.player.setAir(event.player.getAir() + 1);
+			}
+			//event.player.getFoodStats().addExhaustion(1.0F);
 		}
-	}*/
+	}
 
 	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
@@ -177,7 +215,7 @@ public class BioEventSubscriber {
 			System.out.println("entityJoinWorld: Entity is EntityPlayer");
 			EntityPlayer evPlayer = (EntityPlayer)event.getEntity();
 			FoodStats oldFoodStats = evPlayer.getFoodStats();
-			if (oldFoodStats instanceof CustomFoodStats && oldFoodStats.getClass() == FoodStats.class) // Check to prevent nesting
+			if (oldFoodStats instanceof CustomFoodStats || !(oldFoodStats.getClass() == FoodStats.class)) // Check to prevent nesting
 			{
 				System.out.println("oldFootStats are already CustomFoodStats, no reflection to be done");
 			}
