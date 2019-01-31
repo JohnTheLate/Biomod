@@ -3,8 +3,8 @@
   "textures":
   {
     "particle": "ntm:blocks/special_furnace_front_off",
-    "up": "ntm:blocks/special_furnace_front_off",
-    "down": "ntm:blocks/special_furnace_front_off",
+    "up": "ntm:blocks/special_furnace_top",
+    "down": "ntm:blocks/special_furnace_top",
     "north": "ntm:blocks/special_furnace_front_off",
     "east": "ntm:blocks/special_furnace_side1",
     "south": "ntm:blocks/special_furnace_side3",

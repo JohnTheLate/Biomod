@@ -6,6 +6,7 @@ import john.mod.tabs.NTutTab;
 import john.mod.util.Reference;
 import john.mod.util.handlers.RegistryHandler;
 import john.mod.util.interfaces.IElementHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumFacing;
@@ -55,5 +56,10 @@ public class Main
 		if (entity.hasCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN))
 			return entity.getCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN);
 		return null;
+	}
+
+	public static void setLocalPlayerElement(BioElements element)
+	{
+		getHandler(Minecraft.getMinecraft().player).setElement(element);
 	}
 }

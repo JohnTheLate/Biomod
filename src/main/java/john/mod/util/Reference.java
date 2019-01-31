@@ -11,4 +11,7 @@ public class Reference
 	public static final int ENTITY_CENTAUR = 120;
 
 	public static final	int GUI_SPECIAL_FURNACE = 0;
+
+	//Bionicle GUIs
+	public static final int GUI_ELEMENT_CHOICE = 1;
 }
