@@ -7,14 +7,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 
 public class AirAxe extends BioWeapon implements IHasModel
 {
 	public AirAxe(String name)
 	{
 		super(name, 11, -2.8F, BioElements.AIR);
+		this.setMaxDamage(1000);
 	}
 
 	@Override
@@ -46,4 +50,20 @@ public class AirAxe extends BioWeapon implements IHasModel
 
 	}
 	*/
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
+
+ 	@Override
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+	{
+		System.out.println("used"); 
+		System.out.println("used");
+		stack.damageItem(1, player);
+	}
+
+	//-1784338777788894343 nice Beta map seed
 }

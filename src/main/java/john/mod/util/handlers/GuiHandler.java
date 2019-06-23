@@ -1,5 +1,6 @@
 package john.mod.util.handlers;
 
+import john.mod.GuiElementChoice;
 import john.mod.objects.blocks.machines.specialfurnace.ContainerSpecialFurnace;
 import john.mod.objects.blocks.machines.specialfurnace.GuiSpecialFurnace;
 import john.mod.objects.blocks.machines.specialfurnace.TileEntitySpecialFurnace;
@@ -8,8 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-
-import javax.annotation.Nullable;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -29,6 +28,10 @@ public class GuiHandler implements IGuiHandler
 		if (ID == Reference.GUI_SPECIAL_FURNACE)
 		{
 			return new GuiSpecialFurnace(player.inventory, (TileEntitySpecialFurnace)world.getTileEntity(new BlockPos(x, y, z)));
+		}
+		else if (ID == Reference.GUI_ELEMENT_CHOICE)
+		{
+			//return new GuiElementChoice(player);
 		}
 		return null;
 	}

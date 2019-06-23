@@ -70,6 +70,7 @@ public class CustomFoodStats extends FoodStats
 		{
 			oldStats.addExhaustion(exhaustion);
 		}
+		//System.out.println("custom stats! Ice status: " + isIce + exhaustion);
 	}
 
 	@Override
@@ -88,5 +89,15 @@ public class CustomFoodStats extends FoodStats
 	public void setFoodSaturationLevel(float foodSaturationLevelIn)
 	{
 		oldStats.setFoodSaturationLevel(foodSaturationLevelIn);
+	}
+
+	public boolean isIce()
+	{
+		return isIce;
+	}
+
+	public void setIceStatus(Boolean status)
+	{
+		isIce = status;
 	}
 }

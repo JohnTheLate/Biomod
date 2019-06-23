@@ -58,6 +58,7 @@ public class IceSword extends BioWeapon implements IHasModel
 		return true;
 	}
 
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		boolean flag = true;

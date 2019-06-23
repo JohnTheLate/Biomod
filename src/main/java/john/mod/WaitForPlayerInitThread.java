@@ -2,7 +2,7 @@ package john.mod;
 
 import net.minecraft.client.Minecraft;
 
-import static john.mod.Main.getHandler;
+// import static john.mod.Main.setElement;
 
 public class WaitForPlayerInitThread implements Runnable
 {
@@ -25,7 +25,7 @@ public class WaitForPlayerInitThread implements Runnable
 				System.out.println("player is null, sleeping for 2 seconds");
 				Thread.sleep(2000);
 			}
-			getHandler(Minecraft.getMinecraft().player).setElement(element);
+			//setElement(Minecraft.getMinecraft().player, element);
 		}
 		catch (InterruptedException ie)
 		{

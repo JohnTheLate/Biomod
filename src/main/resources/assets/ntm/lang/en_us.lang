@@ -7,11 +7,22 @@ container.special_furnace=Special Furnace
 generator.MataNui=Mata Nui
 generator.SingleBiome=Single Biome
 
+key.biomod.category=Biomod Keybinds
+key.mask=Activate Mask
+key.hud=Open some HUD
+
 entity.centaur.name=Centaur
 
 container.meteor_furnace=Meteor Furnace
 container.rf_generator=Nether Generator
 container.microwave=Microwave
+
+tile.block_meteor.name=Meteor Block
+tile.ore_meteor.name=Meteor Ore
+tile.special_furnace=Special Furnace
+
+tile.ore_overworld_meteor.name=Meteor Ore
+tile.ore_overworld_aluminium.name=Aluminium Ore
 
 item.ingot_meteor.name=Meteor Ingot
 item.axe_meteor.name=Meteor Axe
@@ -26,13 +37,6 @@ item.helmet_meteor.name=Meteor Helmet
 item.chestplate_meteor.name=Meteor Chestplate
 item.leggings_meteor.name=Meteor Leggings
 item.boots_meteor.name=Meteor Boots
-
-tile.block_meteor.name=Meteor Block
-tile.ore_meteor.name=Meteor Ore
-tile.special_furnace=Special Furnace
-
-tile.ore_overworld_meteor.name=Meteor Ore
-tile.ore_overworld_aluminium.name=Aluminium Ore
 
 item.bioweap_fire_sword.name=Fire Sword
 item.bioweap_air_axe.name=Air Axe
@@ -59,6 +63,7 @@ item.biogear.name=Gear
 tile.biotelescope.name=Telescope
 item.biokoliball.name=Koli Ball
 item.bioflute.name=Flute
+item.biofireitem.name=Fire
 
 item.biosaw_wood.name=Wooden Saw
 item.biosaw_stone.name=Stone Saw

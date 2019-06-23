@@ -6,9 +6,16 @@ import john.mod.Main;
 import john.mod.init.ItemInit;
 import john.mod.util.interfaces.IHasModel;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,6 +34,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 import java.util.UUID;
@@ -117,6 +125,12 @@ public class Kanohi extends Item implements IHasModel
 	public int getItemEnchantability()
 	{
 		return 0;
+	}
+
+	@Override
+	public boolean isEnchantable(ItemStack stack)
+	{
+		return false;
 	}
 
 	/**
@@ -263,4 +277,33 @@ public class Kanohi extends Item implements IHasModel
 	{
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}
+
+	@Override
+	public boolean isValidArmor(ItemStack stack, EntityEquipmentSlot armorType, Entity entity)
+	{
+		if(armorType == EntityEquipmentSlot.HEAD)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)
+	{
+		return EntityEquipmentSlot.HEAD;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, net.minecraft.client.gui.ScaledResolution resolution, float partialTicks)
+	{
+
+	}
+
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack){}
 }

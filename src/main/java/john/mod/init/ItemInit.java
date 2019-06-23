@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import john.mod.objects.armor.ArmorBase;
+import john.mod.objects.items.BioFireItem;
 import john.mod.objects.items.BioItemBase;
 import john.mod.objects.items.ItemBase;
 import john.mod.objects.kanohi.*;
@@ -70,10 +71,18 @@ public class ItemInit
 	public static final Item KANOHI_KAUKAU = new KanohiKaukau("kanohi_kaukau");
 	public static final Item KANOHI_KAKAMA = new KanohiKakama("kanohi_kakama");
 
+	public static final Item KANOHI_HUNA = new KanohiHuna("kanohi_huna");
+	public static final Item KANOHI_MAHIKI = new KanohiMahiki("kanohi_mahiki");
+	public static final Item KANOHI_RURU = new KanohiRuru("kanohi_ruru");
+	public static final Item KANOHI_MATATU = new KanohiMatatu("kanohi_matatu");
+	public static final Item KANOHI_RAU = new KanohiRau("kanohi_rau");
+	public static final Item KANOHI_KOMAU = new KanohiKomau("kanohi_komau");
+
 	//Bionicle Items
 	public static final Item BIO_GEAR = new BioItemBase("biogear");
 	public static final Item KOLI_BALL = new BioItemBase("biokoliball");
 	public static final Item FLUTE_AIR = new BioItemBase("bioflute");
+	public static final Item BIO_FIRE_ITEM = new BioFireItem("biofireitem");
 
 	public static final Item DRILL_WOOD = new BioDrill("biodrill_wood", ToolMaterial.WOOD);
 	public static final Item DRILL_STONE = new BioDrill("biodrill_stone", ToolMaterial.STONE);

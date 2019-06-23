@@ -4,12 +4,11 @@ import john.mod.proxy.CommonProxy;
 import john.mod.tabs.BioTab;
 import john.mod.tabs.NTutTab;
 import john.mod.util.Reference;
+import john.mod.util.handlers.DefaultBioPlayerDataHandler;
 import john.mod.util.handlers.RegistryHandler;
-import john.mod.util.interfaces.IElementHandler;
-import net.minecraft.client.Minecraft;
+import john.mod.util.interfaces.IBioPlayerDataHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.fml.common.Mod;
@@ -37,29 +36,34 @@ public class Main
 	{
 		RegistryHandler.preInitRegistries();
 	}
+
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		RegistryHandler.initRegistries();
 	}
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		RegistryHandler.postInitRegistries();
 	}
 
-	@CapabilityInject(IElementHandler.class)
-	public static final Capability<IElementHandler> CAPABILITY_ELEMENT = null;
+	@CapabilityInject(IBioPlayerDataHandler.class)
+	public static final Capability<IBioPlayerDataHandler> CAPABILITY_BIO_PLAYER_DATA = null;
 
-	public static IElementHandler getHandler(Entity entity)
+	//Used to get the the element capabilities of a player
+	public static BioElements getElement(Entity entity)
 	{
-		if (entity.hasCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN))
-			return entity.getCapability(CAPABILITY_ELEMENT, EnumFacing.DOWN);
+		if (entity.hasCapability(CAPABILITY_BIO_PLAYER_DATA, null))
+			return entity.getCapability(CAPABILITY_BIO_PLAYER_DATA, null).getElement();
 		return null;
 	}
 
-	public static void setLocalPlayerElement(BioElements element)
+	public static DefaultBioPlayerDataHandler getBioData(Entity entity)
 	{
-		getHandler(Minecraft.getMinecraft().player).setElement(element);
+		if (entity.hasCapability(CAPABILITY_BIO_PLAYER_DATA, null))
+			return (DefaultBioPlayerDataHandler)entity.getCapability(CAPABILITY_BIO_PLAYER_DATA, null);
+		return null;
 	}
 }
