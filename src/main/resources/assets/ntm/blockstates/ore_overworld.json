@@ -1,6 +1,0 @@
-{
-    "variants": 
-    {
-        "variant=meteor": { "model": "ntm:ore_overworld_meteor" }
-    }
-}
