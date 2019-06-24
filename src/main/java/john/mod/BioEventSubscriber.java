@@ -239,10 +239,7 @@ public class BioEventSubscriber
 					if (!player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(moveSpeedBonusKakama))
 					{
 						player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(moveSpeedBonusKakama);
-					}
-					if (player.collidedHorizontally)
-					{
-						player.motionY = 0.65D;
+						player.stepHeight += 0.5F;
 					}
 					if (!player.world.isRemote) //Server only
 					{
@@ -256,6 +253,7 @@ public class BioEventSubscriber
 					if (player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(moveSpeedBonusKakama))
 					{
 						player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(moveSpeedBonusKakama);
+						player.stepHeight -= 0.5F;
 					}
 					if (!player.world.isRemote) //Server only
 					{
