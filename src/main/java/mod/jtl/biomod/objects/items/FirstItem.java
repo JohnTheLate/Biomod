@@ -10,6 +10,6 @@ public class FirstItem extends Item
 		super(new Item.Properties()
 				.group(Biomod.setup.itemGroup)
 				.maxStackSize(7));
-		setRegistryName("firstitem");
+		//setRegistryName("biogear");
 	}
 }

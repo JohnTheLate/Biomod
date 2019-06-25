@@ -2,5 +2,55 @@
   "block.biomod.firstblock": "Camo",
 
   "_comment": "Creative Tabs",
-  "itemGroup.biomod": "Biomod items"
+  "itemGroup.biomod": "Bionicle Mod Items",
+
+  "key.biomod.category": "Biomod Keybinds",
+  "key.mask": "Activate Mask",
+  "key.hud": "Open some HUD",
+
+  "item.biomod.bioweap_fire_sword": "Fire Sword",
+  "item.biomod.bioweap_air_axe": "Air Axe",
+  "item.biomod.bioweap_earth_claw": "Earth Claw",
+  "item.biomod.bioweap_ice_sword": "Ice Sword",
+  "item.biomod.bioweap_water_hook": "Water Hook",
+  "item.biomod.bioweap_stone_hand": "Stone Hand",
+
+  "item.biomod.bioweap_fire_staff": "Fire Staff",
+  "item.biomod.bioweap_air_staff": "Air Staff",
+  "item.biomod.bioweap_earth_staff": "Earth Staff",
+  "item.biomod.bioweap_ice_staff": "Ice Staff",
+  "item.biomod.bioweap_water_staff": "Water Staff",
+  "item.biomod.bioweap_stone_staff": "Stone Staff",
+
+  "item.biomod.kanohi_hau": "Kanohi Hau",
+  "item.biomod.kanohi_miru": "Kanohi Miru",
+  "item.biomod.kanohi_pakari": "Kanohi Pakari",
+  "item.biomod.kanohi_akaku": "Kanohi Akaku",
+  "item.biomod.kanohi_kaukau": "Kanohi Kaukau",
+  "item.biomod.kanohi_kakama": "Kanohi Kakama",
+
+  "item.biomod.kanohi_huna": "Kanohi Huna",
+  "item.biomod.kanohi_mahiki": "Kanohi Mahiki",
+  "item.biomod.kanohi_ruru": "Kanohi Ruru",
+  "item.biomod.kanohi_matatu": "Kanohi Matatu",
+  "item.biomod.kanohi_rau": "Kanohi Rau",
+  "item.biomod.kanohi_komau": "Kanohi Komau",
+
+  "item.biomod.biogear": "Gear",
+  "item.biomod.biokoliball": "Koli Ball",
+  "item.biomod.bioflute": "Flute",
+  "item.biomod.biofireitem": "Fire",
+  "block.biomod.biotelescope": "Telescope",
+
+  "item.biomod.biosaw_wood": "Wooden Saw",
+  "item.biomod.biosaw_stone": "Stone Saw",
+  "item.biomod.biosaw_iron": "Iron Saw",
+  "item.biomod.biosaw_diamond": "Diamond Saw",
+  "item.biomod.biosaw_gold": "Golden Saw",
+
+  "item.biomod.biodrill_wood": "Wooden Drill",
+  "item.biomod.biodrill_stone": "Stone Drill",
+  "item.biomod.biodrill_iron": "Iron Drill",
+  "item.biomod.biodrill_diamond": "Diamond Drill",
+  "item.biomod.biodrill_gold": "Golden Drill"
 }
