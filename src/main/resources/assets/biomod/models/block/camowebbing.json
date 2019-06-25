@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "biomod:block/firstblock"
+    "all": "biomod:block/camowebbing"
   }
 }

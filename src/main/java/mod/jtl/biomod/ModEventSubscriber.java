@@ -1,14 +1,13 @@
 package mod.jtl.biomod;
 
 import com.google.common.base.Preconditions;
-import mod.jtl.biomod.objects.blocks.FirstBlock;
-import mod.jtl.biomod.objects.blocks.ModBlocks;
+import mod.jtl.biomod.init.ModItemGroups;
+import mod.jtl.biomod.objects.blocks.CamoWebbing;
 import mod.jtl.biomod.objects.items.FirstItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -27,7 +26,7 @@ public class ModEventSubscriber
 	{
 		Biomod.LOGGER.info("HELLO from Register Block");
 
-		event.getRegistry().register(setup(new FirstBlock(), "firstblock"));
+		event.getRegistry().register(setup(new CamoWebbing(), "camowebbing"));
 	}
 
 	@SubscribeEvent
@@ -42,7 +41,7 @@ public class ModEventSubscriber
 				setup(new FirstItem(), "biogear")
 		);
 
-
+		//Following code by Cadiboo
 		// We need to go over the entire registry so that we include any potential Registry Overrides
 		for (final Block block : ForgeRegistries.BLOCKS.getValues()) {
 
@@ -60,7 +59,7 @@ public class ModEventSubscriber
 			//}
 
 			// Make the properties, and make it so that the item will be on our ItemGroup (CreativeTab)
-			final Item.Properties properties = new Item.Properties().group(Biomod.setup.itemGroup);
+			final Item.Properties properties = new Item.Properties().group(ModItemGroups.BIOMOD_ITEM_GROUP);
 			// Create the new BlockItem with the block and it's properties
 			final BlockItem blockItem = new BlockItem(block, properties);
 			// Setup the new BlockItem with the block's registry name and register it
@@ -69,6 +68,7 @@ public class ModEventSubscriber
 
 	}
 
+	//Following code by Cadiboo
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name)
 	{
 		return setup(entry, new ResourceLocation(Biomod.MODID, name));
