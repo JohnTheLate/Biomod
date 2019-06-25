@@ -4,13 +4,16 @@ import mod.jtl.biomod.init.ModTileEntityTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -18,7 +21,7 @@ import javax.annotation.Nullable;
 
 public class TelescopeTileEntity extends TileEntity implements ITickableTileEntity
 {
-	private ItemStackHandler handler;
+	private LazyOptional<IItemHandler> handler = LazyOptional.of(this::createHandler).cast();
 
 	public TelescopeTileEntity(TileEntityType<?> type)
 	{
@@ -43,43 +46,43 @@ public class TelescopeTileEntity extends TileEntity implements ITickableTileEnti
 	public void read(CompoundNBT tag)
 	{
 		CompoundNBT invTag = tag.getCompound("inv");
-		getHandler().deserializeNBT(invTag);
+		handler.ifPresent(h -> ((INBTSerializable<INBT>) h).deserializeNBT(invTag));
+		createHandler().deserializeNBT(invTag);
 		super.read(tag);
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT tag)
 	{
-		CompoundNBT compound = getHandler().serializeNBT();
-		tag.put("inv", compound);
+		handler.ifPresent(h ->
+		{
+			CompoundNBT compound = createHandler().serializeNBT();
+			tag.put("inv", compound);
+		});
 		return super.write(tag);
 	}
 
-	private ItemStackHandler getHandler()
+	private ItemStackHandler createHandler()
 	{
-		if (handler == null)
+		return new ItemStackHandler(1)
 		{
-			handler = new ItemStackHandler(1)
+			@Override
+			public boolean isItemValid(int slot, @Nonnull ItemStack stack)
 			{
-				@Override
-				public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-				{
-					return stack.getItem() == Items.EMERALD;
-				}
+				return stack.getItem() == Items.EMERALD;
+			}
 
-				@Nonnull
-				@Override
-				public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+			@Nonnull
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
+			{
+				if (stack.getItem() == Items.EMERALD)
 				{
-					if (stack.getItem() == Items.EMERALD)
-					{
-						return stack;
-					}
-					return super.insertItem(slot, stack, simulate);
+					return stack;
 				}
-			};
-		}
-		return handler;
+				return super.insertItem(slot, stack, simulate);
+			}
+		};
 	}
 
 	@Nonnull
@@ -88,7 +91,7 @@ public class TelescopeTileEntity extends TileEntity implements ITickableTileEnti
 	{
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
-			return LazyOptional.of(() -> (T) getHandler());
+			return handler.cast();
 		}
 		return super.getCapability(cap, side);
 	}
