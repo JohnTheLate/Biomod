@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shaped",
+
+    "pattern":
+    [
+        "  E",
+        "GII",
+        "SS "
+    ],
+
+    "key":
+    {
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        "E":
+        {
+            "item": "minecraft:emerald"
+        },
+        "S":
+        {
+            "item": "minecraft:stone"
+        },
+        "G":
+        {
+            "item": "biomod:biogear"
+        }
+    },
+
+    "result":
+    {
+        "item": "biomod:telescope",
+        "count": 1
+    }
+}

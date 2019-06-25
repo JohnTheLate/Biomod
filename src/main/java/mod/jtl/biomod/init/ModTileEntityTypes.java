@@ -2,12 +2,11 @@ package mod.jtl.biomod.init;
 
 import mod.jtl.biomod.Biomod;
 import mod.jtl.biomod.ModUtil;
-import mod.jtl.biomod.objects.items.FirstItem;
-import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(Biomod.MODID)
-public final class ModItems
+public class ModTileEntityTypes
 {
-	public static final Item BIOGEAR = ModUtil._null();
+	public static final TileEntityType<?> TELESCOPE_TILE_ENTITY = ModUtil._null();
 }

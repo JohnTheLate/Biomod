@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "biomod:block/telescope"},
+    "facing=south": { "model": "biomod:block/telescope", "y": 180},
+    "facing=west": { "model": "biomod:block/telescope", "y": 270},
+    "facing=east": { "model": "biomod:block/telescope", "y": 90},
+    "facing=up": { "model": "biomod:block/telescope", "x": -90},
+    "facing=down": { "model": "biomod:block/telescope", "x": 90}
+  }
+}

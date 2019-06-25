@@ -1,12 +1,17 @@
 package mod.jtl.biomod;
 
 import com.google.common.base.Preconditions;
+import mod.jtl.biomod.init.ModBlocks;
 import mod.jtl.biomod.init.ModItemGroups;
 import mod.jtl.biomod.objects.blocks.CamoWebbing;
+import mod.jtl.biomod.objects.blocks.Telescope;
+import mod.jtl.biomod.objects.blocks.tileentity.TelescopeTileEntity;
 import mod.jtl.biomod.objects.items.FirstItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,6 +32,7 @@ public class ModEventSubscriber
 		Biomod.LOGGER.info("HELLO from Register Block");
 
 		event.getRegistry().register(setup(new CamoWebbing(), "camowebbing"));
+		event.getRegistry().register(setup(new Telescope(), "telescope"));
 	}
 
 	@SubscribeEvent
@@ -66,6 +72,14 @@ public class ModEventSubscriber
 			registry.register(setup(blockItem, blockRegistryName));
 		}
 
+	}
+
+	@SubscribeEvent
+	public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event)
+	{
+		event.getRegistry().registerAll(
+				setup(TileEntityType.Builder.create(TelescopeTileEntity::new, ModBlocks.TELESCOPE).build(null), "telescope_tile_entity")
+		);
 	}
 
 	//Following code by Cadiboo
