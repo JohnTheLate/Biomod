@@ -5,17 +5,23 @@ import mod.jtl.biomod.init.ModBlocks;
 import mod.jtl.biomod.init.ModItemGroups;
 import mod.jtl.biomod.objects.blocks.CamoWebbing;
 import mod.jtl.biomod.objects.blocks.Telescope;
-import mod.jtl.biomod.objects.blocks.tileentity.TelescopeTileEntity;
-import mod.jtl.biomod.objects.items.FirstItem;
+import mod.jtl.biomod.objects.blocks.WickerBin;
+import mod.jtl.biomod.objects.blocks.tileentity.WickerBinTileEntity;
+import mod.jtl.biomod.objects.container.WickerBinContainer;
+import mod.jtl.biomod.objects.items.BioGear;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -31,8 +37,11 @@ public class ModEventSubscriber
 	{
 		Biomod.LOGGER.info("HELLO from Register Block");
 
-		event.getRegistry().register(setup(new CamoWebbing(), "camowebbing"));
-		event.getRegistry().register(setup(new Telescope(), "telescope"));
+		event.getRegistry().registerAll(
+				setup(new CamoWebbing(), "camowebbing"),
+				setup(new Telescope(), "telescope"),
+				setup(new WickerBin(), "wickerbin")
+		);
 	}
 
 	@SubscribeEvent
@@ -44,10 +53,10 @@ public class ModEventSubscriber
 
 		event.getRegistry().registerAll(
 				//setup(new BlockItem(ModBlocks.FIRSTBLOCK, properties), "firstblock"),
-				setup(new FirstItem(), "biogear")
+				setup(new BioGear(), "biogear")
 		);
 
-		//Following code by Cadiboo
+		// Following code by Cadiboo
 		// We need to go over the entire registry so that we include any potential Registry Overrides
 		for (final Block block : ForgeRegistries.BLOCKS.getValues()) {
 
@@ -78,11 +87,29 @@ public class ModEventSubscriber
 	public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event)
 	{
 		event.getRegistry().registerAll(
-				setup(TileEntityType.Builder.create(TelescopeTileEntity::new, ModBlocks.TELESCOPE).build(null), "telescope_tile_entity")
+				setup(TileEntityType.Builder.create(WickerBinTileEntity::new, ModBlocks.WICKERBIN).build(null), "wickerbin")
 		);
 	}
 
-	//Following code by Cadiboo
+	@SubscribeEvent
+	public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event)
+	{
+		event.getRegistry().registerAll(
+				setup(
+					IForgeContainerType.create(new IContainerFactory<WickerBinContainer>()
+					{
+						@Override
+						public WickerBinContainer create(int windowId, PlayerInventory inv, PacketBuffer data)
+						{
+							return new WickerBinContainer(windowId, Biomod.proxy.getClientWorld(), data.readBlockPos(), inv, Biomod.proxy.getClientPlayer());
+						}
+					})
+					, "wickerbin"
+				)
+		);
+	}
+
+	// Following code by Cadiboo
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name)
 	{
 		return setup(entry, new ResourceLocation(Biomod.MODID, name));

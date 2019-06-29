@@ -1,6 +1,6 @@
 package mod.jtl.biomod.objects.blocks;
 
-import mod.jtl.biomod.objects.blocks.tileentity.TelescopeTileEntity;
+import mod.jtl.biomod.objects.blocks.tileentity.WickerBinTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -9,6 +9,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -32,26 +33,8 @@ public class Telescope extends DirectionalBlock
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state)
-	{
-		return true;
-	}
-
-	@Nullable
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world)
-	{
-		return new TelescopeTileEntity();
-	}
-
-	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
 		return (BlockState)this.getDefaultState().with(FACING, ctx.getPlacementHorizontalFacing().getOpposite());
-	}
-
-	public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity)
-	{
-		return Direction.getFacingFromVector((float) entity.posX - clickedBlock.getX(), (float) entity.posY - clickedBlock.getY(), (float) entity.posZ - clickedBlock.getZ());
 	}
 
 	@Override
@@ -85,5 +68,11 @@ public class Telescope extends DirectionalBlock
 			expAmount -= expFraction;
 			world.addEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY(), pos.getZ() + 1, expFraction));
 		} */
+	}
+
+	@Override
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 }
