@@ -7,11 +7,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,6 +17,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.util.NonNullConsumer;
+import net.minecraftforge.common.util.NonNullSupplier;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -28,30 +27,24 @@ import javax.annotation.Nullable;
 
 public class WickerBinTileEntity extends TileEntity implements INamedContainerProvider
 {
-	private LazyOptional<IItemHandler> handler = LazyOptional.of(this::createHandler).cast();
-
-	//public WickerBinTileEntity(TileEntityType<?> type)
-	//{
-	//	super(type);
-	//}
+	private final ItemStackHandler inventory = this.createHandler();
+	private final LazyOptional<ItemStackHandler> inventoryOptional = LazyOptional.of(() -> inventory);
 
 	public WickerBinTileEntity()
 	{
 		super(ModTileEntityTypes.WICKER_BIN_TILE_ENTITY);
 	}
 
+	public ItemStackHandler getInventory()
+	{
+		return inventory;
+	}
+
 	@Override
 	public void read(CompoundNBT tag)
 	{
 		CompoundNBT invTag = tag.getCompound("inv");
-		handler.ifPresent(new NonNullConsumer<IItemHandler>()
-		{
-			@Override
-			public void accept(@Nonnull IItemHandler h)
-			{
-				((INBTSerializable<INBT>) h).deserializeNBT(invTag);
-			}
-		});
+		inventoryOptional.ifPresent((NonNullConsumer<IItemHandler>) h -> ((INBTSerializable<INBT>) h).deserializeNBT(invTag));
 		createHandler().deserializeNBT(invTag);
 		super.read(tag);
 	}
@@ -59,14 +52,10 @@ public class WickerBinTileEntity extends TileEntity implements INamedContainerPr
 	@Override
 	public CompoundNBT write(CompoundNBT tag)
 	{
-		handler.ifPresent(new NonNullConsumer<IItemHandler>()
+		inventoryOptional.ifPresent((NonNullConsumer<IItemHandler>) h ->
 		{
-			@Override
-			public void accept(@Nonnull IItemHandler h)
-			{
-				CompoundNBT compound = WickerBinTileEntity.this.createHandler().serializeNBT();
-				tag.put("inv", compound);
-			}
+			CompoundNBT compound = WickerBinTileEntity.this.createHandler().serializeNBT();
+			tag.put("inv", compound);
 		});
 		return super.write(tag);
 	}
@@ -80,7 +69,7 @@ public class WickerBinTileEntity extends TileEntity implements INamedContainerPr
 				markDirty();
 			}
 
-			@Override
+			/*@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack)
 			{
 				return true; //stack.getItem() == Items.EMERALD;
@@ -95,7 +84,7 @@ public class WickerBinTileEntity extends TileEntity implements INamedContainerPr
 				//	return stack;
 				//}
 				return super.insertItem(slot, stack, simulate);
-			}
+			}*/
 		};
 	}
 
@@ -105,7 +94,7 @@ public class WickerBinTileEntity extends TileEntity implements INamedContainerPr
 	{
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 		{
-			return handler.cast();
+			return inventoryOptional.cast();
 		}
 		return super.getCapability(cap, side);
 	}
