@@ -2,12 +2,9 @@ package mod.jtl.biomod;
 
 import mod.jtl.biomod.setup.ClientProxy;
 import mod.jtl.biomod.setup.IProxy;
-import mod.jtl.biomod.setup.ModSetup;
 import mod.jtl.biomod.setup.ServerProxy;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -23,8 +20,6 @@ public final class Biomod
 	public static final String MODID = "biomod";
 
 	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
-
-	public static ModSetup setup = new ModSetup();
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	
@@ -43,7 +38,6 @@ public final class Biomod
 		LOGGER.info("HELLO FROM PREINIT");
 		LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
-		setup.init();
 		proxy.init();
 	}
 
