@@ -1,8 +1,13 @@
 package mod.jtl.biomod.crafting;
 
+import com.google.common.base.Throwables;
 import com.google.gson.JsonObject;
 import mod.jtl.biomod.init.ModCrafting;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.inventory.container.WorkbenchContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -11,9 +16,13 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import java.lang.reflect.Field;
 
 public class ConditionalShapedRecipe extends ShapedRecipe
 {
@@ -25,11 +34,17 @@ public class ConditionalShapedRecipe extends ShapedRecipe
 	}
 
 	@Override
+	public boolean matches(CraftingInventory inv, World worldIn)
+	{
+		return super.matches(inv, worldIn);
+	}
+
+	@Override
 	public ItemStack getCraftingResult(CraftingInventory inv)
 	{
 		final ItemStack output = super.getCraftingResult(inv);
 
-		if (true)
+		if (findPlayer(inv).isCreative() || findPlayer(inv).isBurning())
 		{
 			output.setCount(output.getCount() * 2);
 		}
@@ -85,6 +100,22 @@ public class ConditionalShapedRecipe extends ShapedRecipe
 			}
 
 			buffer.writeItemStack(recipe.getRecipeOutput());
+		}
+	}
+
+	private static PlayerEntity findPlayer(CraftingInventory inv) {
+		try {
+			Container container = inv.field_70465_c;
+			if (container instanceof PlayerContainer) {
+				return ((PlayerContainer) container).player;
+			} else if (container instanceof WorkbenchContainer) {
+				return ((WorkbenchContainer) container).player;
+			} else {
+        // don't know the player
+				return null;
+			}
+		} catch (Exception e) {
+			throw Throwables.propagate(e);
 		}
 	}
 }
