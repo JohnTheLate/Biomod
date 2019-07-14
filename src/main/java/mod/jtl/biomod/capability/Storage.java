@@ -1,38 +1,36 @@
 package mod.jtl.biomod.capability;
 
 import mod.jtl.biomod.BioElements;
-import mod.jtl.biomod.capability.IBioPlayerDataHandler;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
 
-public class Storage implements Capability.IStorage<IBioPlayerDataHandler> {
-
-    @Override
-    public NBTBase writeNBT (Capability<IBioPlayerDataHandler> capability, IBioPlayerDataHandler instance, EnumFacing side)
-    {
-        final NBTTagCompound tag = new NBTTagCompound();
-        if (instance.getElement() == null)
+public class Storage implements IStorage<IBioData>
+{
+	@Override
+	public INBT writeNBT(Capability<IBioData> capability, IBioData instance, Direction side) {
+		final CompoundNBT tag = new CompoundNBT();
+		if (instance.getElement() == null)
 		{
-			System.out.println("Tag is null?! Setting element to NONE");
-			tag.setString("element", BioElements.NONE.name());
+			System.out.println("Element is null?! Setting element to NONE");
+			tag.putString("element", BioElements.NONE.name());
 		}
 		else
 		{
-			tag.setString("element", instance.getElement().name());
+			tag.putString("element", instance.getElement().name());
 		}
-		tag.setBoolean("active", instance.getMaskActive());
-        tag.setInteger("charge", instance.getMaskCharge());
-        System.out.println("Tag written: Element:" + tag.getString("element") + "Status:" + tag.getBoolean("active") + "Charge:" + tag.getInteger("charge"));
-        return tag;
-    }
+		tag.putBoolean("active", instance.getMaskActive());
+		tag.putInt("charge", instance.getMaskCharge());
+		System.out.println("Tag written: Element:" + tag.getString("element") + "Status:" + tag.getBoolean("active") + "Charge:" + tag.getInt("charge"));
+		return tag;
+	}
 
-    @Override
-    public void readNBT (Capability<IBioPlayerDataHandler> capability, IBioPlayerDataHandler instance, EnumFacing side, NBTBase nbt)
-    {
-		final NBTTagCompound tag = (NBTTagCompound) nbt;
-    	try
+	@Override
+	public void readNBT(Capability<IBioData> capability, IBioData instance, Direction side, INBT nbt) {
+		final CompoundNBT tag = (CompoundNBT) nbt;
+		try
 		{
 			instance.setElement(BioElements.valueOf(tag.getString("element")));
 		}
@@ -43,6 +41,6 @@ public class Storage implements Capability.IStorage<IBioPlayerDataHandler> {
 			System.out.println("Element was set to NONE.");
 		}
 		instance.setMaskActive(tag.getBoolean("active"));
-    	instance.setMaskCharge(tag.getInteger("charge"));
+		instance.setMaskCharge(tag.getInt("charge"));
 	}
 }

@@ -1,9 +1,8 @@
 package mod.jtl.biomod.capability;
 
 import mod.jtl.biomod.BioElements;
-import mod.jtl.biomod.capability.IBioPlayerDataHandler;
 
-public class DefaultBioPlayerDataHandler implements IBioPlayerDataHandler
+public class DefaultBioData implements IBioData
 {
     private BioElements element;
     private Boolean maskActive = false;
@@ -11,17 +10,20 @@ public class DefaultBioPlayerDataHandler implements IBioPlayerDataHandler
     private final int maxCharge = 10000;
 
     @Override
-    public BioElements getElement() {
+    public BioElements getElement()
+	{
         return element;
     }
 
     @Override
-    public void setElement(BioElements element) {
+    public void setElement(BioElements element)
+	{
         this.element = element;
     }
 
     @Override
-    public void removeElement() {
+    public void removeElement()
+	{
         this.element = BioElements.NONE;
     }
 

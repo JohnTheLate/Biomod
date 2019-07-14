@@ -2,7 +2,7 @@ package mod.jtl.biomod.capability;
 
 import mod.jtl.biomod.BioElements;
 
-public interface IBioPlayerDataHandler
+public interface IBioData
 {
     BioElements getElement();
     void setElement(BioElements element);

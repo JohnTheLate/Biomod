@@ -1,6 +1,10 @@
 package mod.jtl.biomod;
 
 import com.google.common.base.Preconditions;
+import mod.jtl.biomod.capability.DefaultBioData;
+import mod.jtl.biomod.capability.IBioData;
+import mod.jtl.biomod.capability.Provider;
+import mod.jtl.biomod.capability.Storage;
 import mod.jtl.biomod.init.ModBlocks;
 import mod.jtl.biomod.init.ModItemGroups;
 import mod.jtl.biomod.objects.blocks.CamoWebbing;
@@ -10,6 +14,8 @@ import mod.jtl.biomod.objects.blocks.tileentity.WickerBinTileEntity;
 import mod.jtl.biomod.objects.container.WickerBinContainer;
 import mod.jtl.biomod.objects.items.BioGear;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
@@ -17,15 +23,21 @@ import net.minecraft.item.Item;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import static mod.jtl.biomod.capability.Provider.BIO_CAP;
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD;
 
 @EventBusSubscriber(modid = Biomod.MODID, bus = MOD)
@@ -52,7 +64,6 @@ public class ModEventSubscriber
 		Biomod.LOGGER.info("HELLO from Register Items");
 
 		event.getRegistry().registerAll(
-				//setup(new BlockItem(ModBlocks.FIRSTBLOCK, properties), "firstblock"),
 				setup(new BioGear(), "biogear")
 		);
 
@@ -108,6 +119,13 @@ public class ModEventSubscriber
 				)
 		);
 	}
+
+	@SubscribeEvent
+	public static void registerCapabilities(final FMLCommonSetupEvent event)
+	{
+		CapabilityManager.INSTANCE.register(IBioData.class, new Storage(), () -> new DefaultBioData());
+	}
+	
 
 	// Following code by Cadiboo
 	public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name)

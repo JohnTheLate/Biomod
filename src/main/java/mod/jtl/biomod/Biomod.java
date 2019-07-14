@@ -22,7 +22,7 @@ public final class Biomod
 	public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-	
+
 	public Biomod()
 	{
 		// Register the setup method for modloading

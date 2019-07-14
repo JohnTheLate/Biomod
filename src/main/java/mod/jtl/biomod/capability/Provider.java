@@ -1,37 +1,39 @@
 package mod.jtl.biomod.capability;
 
-import mod.jtl.biomod.Biomod;
-import mod.jtl.biomod.capability.IBioPlayerDataHandler;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import mod.jtl.biomod.ModUtil;
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.util.LazyOptional;
 
-public class Provider implements ICapabilitySerializable<NBTTagCompound>
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class Provider implements ICapabilitySerializable<INBT>
 {
-    IBioPlayerDataHandler instance = Main.CAPABILITY_BIO_PLAYER_DATA.getDefaultInstance();
+	@CapabilityInject(IBioData.class)
+    public static final Capability<IBioData> BIO_CAP = ModUtil._null();
 
-    @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-    {
-        return capability == Main.CAPABILITY_BIO_PLAYER_DATA;
-    }
+	private LazyOptional<IBioData> instance = LazyOptional.of(DefaultBioData::new);
 
-    @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-    {
-        return hasCapability(capability, facing) ? Main.CAPABILITY_BIO_PLAYER_DATA.<T>cast(instance) : null;
-    }
+	@Override
+	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
+	{
+		return BIO_CAP.orEmpty(cap, instance);
+		//return cap == BIO_CAP ? LazyOptional.of(() -> instance).cast() : LazyOptional.empty();
+	}
 
-    @Override
-    public NBTTagCompound serializeNBT()
-    {
-        return (NBTTagCompound) Main.CAPABILITY_BIO_PLAYER_DATA.getStorage().writeNBT(Main.CAPABILITY_BIO_PLAYER_DATA, instance, null);
-    }
+	@Override
+	public INBT serializeNBT()
+	{
+		return BIO_CAP.getStorage().writeNBT(BIO_CAP, instance.orElse(null), null);
+	}
 
-    @Override
-    public void deserializeNBT(NBTTagCompound nbt)
-    {
-        Main.CAPABILITY_BIO_PLAYER_DATA.getStorage().readNBT(Main.CAPABILITY_BIO_PLAYER_DATA, instance, null, nbt);
-    }
+	@Override
+	public void deserializeNBT(INBT nbt)
+	{
+		BIO_CAP.getStorage().readNBT(BIO_CAP, instance.orElse(null), null, nbt);
+	}
 }

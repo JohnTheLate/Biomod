@@ -16,6 +16,8 @@ out
 # gradle
 build
 .gradle
+gradle.properties
+gradlew*
 
 # other
 eclipse
