@@ -4,15 +4,15 @@
   ],
   "type": "biomod:conditional_shaped",
   "pattern": [
-    "GG",
-    "GG"
+    "SS",
+    "SS"
   ],
   "key": {
-    "G": {
-      "item": "minecraft:gold_block"
+    "S": {
+      "item": "minecraft:sand"
     }
   },
   "result": {
-    "item": "minecraft:gold_ingot"
+    "item": "minecraft:sandstone"
   }
 }

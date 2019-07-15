@@ -36,7 +36,7 @@ public class ForgeEventSubscriber
 
 			IBioData playerData = player.getCapability(BIO_CAP).orElse(null);
 
-			playerData.setElement(BioElements.AIR);
+			playerData.setElement(BioElements.STONE);
 
 			if (playerData.getElement() == BioElements.AIR)
 			{

@@ -2,6 +2,7 @@ package mod.jtl.biomod.crafting;
 
 import com.google.common.base.Throwables;
 import com.google.gson.JsonObject;
+import mod.jtl.biomod.BioElements;
 import mod.jtl.biomod.init.ModCrafting;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
@@ -24,6 +25,8 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.lang.reflect.Field;
 
+import static mod.jtl.biomod.capability.Provider.BIO_CAP;
+
 public class ConditionalShapedRecipe extends ShapedRecipe
 {
 
@@ -44,9 +47,9 @@ public class ConditionalShapedRecipe extends ShapedRecipe
 	{
 		final ItemStack output = super.getCraftingResult(inv);
 
-		if (findPlayer(inv).isCreative() || findPlayer(inv).isBurning())
+		if (findPlayer(inv).getCapability(BIO_CAP).orElse(null).getElement() == BioElements.STONE)
 		{
-			output.setCount(output.getCount() * 2);
+			output.setCount(output.getCount() * 4);
 		}
 
 		return output;

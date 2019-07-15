@@ -1,0 +1,18 @@
+{
+  "_comment": [
+    "Stone element should be able to craft sand into sandstone more efficiently."
+  ],
+  "type": "biomod:conditional_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:red_sand"
+    }
+  },
+  "result": {
+    "item": "minecraft:red_sandstone"
+  }
+}
